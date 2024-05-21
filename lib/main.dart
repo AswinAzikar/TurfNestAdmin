@@ -8,22 +8,37 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   MyApp({super.key});
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final _pageController = PageController();
+  int _pageIndex = 0;
 
   @override
   void dispose() {
     _pageController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: PageView(
           controller: _pageController,
+          onPageChanged: (index) {
+            setState(() {
+              _pageIndex = index;
+            });
+          },
           children: const <Widget>[
             Dashboard(),
             Menu(),
@@ -33,7 +48,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: AppColors.scbgd,
           buttonBackgroundColor: AppColors.blue,
           color: AppColors.blue,
-          height: 55,
+          height: 0.05 * screenHeight,
           animationCurve: Curves.easeIn,
           items: const <Widget>[
             Icon(
@@ -43,10 +58,11 @@ class MyApp extends StatelessWidget {
             ),
             Icon(
               Icons.menu_open_sharp,
-              size: 35,
+              size: 34,
               color: AppColors.white,
             ),
           ],
+          index: _pageIndex,
           onTap: (index) {
             _pageController.animateToPage(index,
                 duration: const Duration(milliseconds: 300),
