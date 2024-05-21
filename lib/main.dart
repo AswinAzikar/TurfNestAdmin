@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
             ),
             Icon(
               Icons.menu_open_sharp,
-              size: 35,
+              size: 34,
               color: AppColors.white,
             ),
           ],
