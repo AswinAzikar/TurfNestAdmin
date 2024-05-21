@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return MaterialApp(
       debugShowCheckedModeBanner: true,
       home: Scaffold(
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: AppColors.scbgd,
           buttonBackgroundColor: AppColors.blue,
           color: AppColors.blue,
-          height: 55,
+          height: 0.05 * screenHeight,
           animationCurve: Curves.easeIn,
           items: const <Widget>[
             Icon(
