@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turfnest_admin/Menu.dart';
 import 'package:turfnest_admin/constants.dart';
 
 class TurfControlPage extends StatefulWidget {
@@ -15,6 +16,17 @@ class _TurfControlPageState extends State<TurfControlPage> {
       appBar: AppBar(
         title: Text('Turf Control'),
         backgroundColor: AppColors.scbgd,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Menu(),
+              ),
+            );
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
