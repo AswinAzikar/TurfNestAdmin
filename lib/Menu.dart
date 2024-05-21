@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:turfnest_admin/Dashboard.dart';
-
+import 'package:turfnest_admin/FeedbackScreen.dart';
+import 'package:turfnest_admin/TurfControl.dart';
 import 'package:turfnest_admin/constants.dart';
+import 'package:turfnest_admin/custom.dart';
+import 'Dashboard.dart';
 
 class Menu extends StatefulWidget {
   const Menu({super.key});
@@ -33,6 +35,8 @@ class _MenuState extends State<Menu> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.scbgd,
       appBar: AppBar(
@@ -52,6 +56,61 @@ class _MenuState extends State<Menu> {
             },
           ),
         ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: GridView.count(
+          crossAxisCount: 2,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 20,
+          childAspectRatio: screenWidth / (screenHeight * 0.5),
+          children: [
+            buildProfileButton(
+              icon: Icons.settings,
+              label: 'Turf Controls',
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const TurfControlPage(),
+                  ),
+                );
+              },
+            ),
+            buildProfileButton(
+              icon: Icons.sports_soccer,
+              label: 'Sports',
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => Dashboard()),
+                );
+              },
+            ),
+            buildProfileButton(
+                icon: Icons.feedback,
+                label: 'Feedback',
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyWidget(),
+                    ),
+                  );
+                }),
+            buildProfileButton(
+                icon: Icons.history_sharp,
+                label: 'Turf History',
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyWidget(),
+                    ),
+                  );
+                }),
+          ],
+        ),
       ),
     );
   }
