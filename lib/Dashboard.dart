@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:turfnest_admin/capsuleButton.dart';
+import 'package:turfnest_admin/Menu.dart';
+
 import 'package:turfnest_admin/constants.dart';
 
 class Dashboard extends StatefulWidget {
@@ -48,19 +49,8 @@ class _DashboardState extends State<Dashboard> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
-            child: ToggleButtonWidget(
-              onPressed: () {
-                if (page == 1) {
-                  Navigator.pushNamed(context, '/menu');
-                } else {
-                  Navigator.pushNamed(context, '/dashboard');
-                }
-                setState(() {});
-              },
-            ),
-          ),
           SizedBox(height: .005 * screenHeight),
           Stack(
             alignment: Alignment.topCenter,
@@ -165,8 +155,7 @@ class _DashboardState extends State<Dashboard> {
                                 ),
                                 SizedBox(height: 0.02 * screenHeight),
                                 Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: List.generate(
                                     4,
                                     (index) => GestureDetector(
@@ -202,12 +191,10 @@ class _DashboardState extends State<Dashboard> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(
-                                                width: 0.09 * screenWidth),
+                                            SizedBox(width: 0.09 * screenWidth),
                                             Container(
                                               padding: EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                  vertical: 4),
+                                                  horizontal: 10, vertical: 4),
                                               decoration: BoxDecoration(
                                                 color: index % 2 == 0
                                                     ? Colors.green
