@@ -11,7 +11,7 @@ class AppColors {
   static const Color white2 = Color.fromARGB(236, 35, 133, 214);
   static const Color gradientStartColor = Color.fromARGB(255, 231, 233, 241);
   static const Color gradientEndColor = AppColors.white;
-  static const Color scbgd = Color.fromARGB(255, 229, 248, 249);
+  static const Color scbgd = Color.fromARGB(255, 236, 239, 233);
 }
 
 class ButtonStyles {
