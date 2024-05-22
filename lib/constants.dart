@@ -4,8 +4,26 @@ import 'package:fluttertoast/fluttertoast.dart';
 class AppColors {
   static const Color blue = Color.fromARGB(255, 87, 150, 232);
   static const Color white = Colors.white;
-  static const Color black = Colors.black;
-  static const Color red = Color.fromARGB(255, 223, 65, 86);
+  static const Color black = Color.fromARGB(255, 214, 68, 68);
+  static const Color red = Color.fromARGB(255, 236, 72, 93);
+
+  static const Gradient blueGradient = LinearGradient(
+    colors: [
+      Color.fromARGB(255, 28, 116, 232),
+      AppColors.blue,
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static const Gradient redGradient = LinearGradient(
+    colors: [
+      Color.fromARGB(255, 193, 0, 0),
+      AppColors.red,
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
   static const Color green = Color.fromARGB(255, 67, 222, 72);
   static const Color grey = Colors.grey;
   static const Color white2 = Color.fromARGB(236, 35, 133, 214);

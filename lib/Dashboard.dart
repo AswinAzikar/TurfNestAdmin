@@ -32,7 +32,13 @@ class _DashboardState extends State<Dashboard> {
       appBar: AppBar(
         title: Text(
           "Dashboard",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            foreground: Paint()
+              ..shader = AppColors.redGradient.createShader(
+                Rect.fromLTWH(0, 0, 200, 50),
+              ),
+          ),
         ),
         backgroundColor: AppColors.scbgd,
         actions: [
@@ -69,7 +75,7 @@ class _DashboardState extends State<Dashboard> {
                         width: rectangleWidth,
                         height: rectangleHeight,
                         decoration: BoxDecoration(
-                          color: Colors.blue,
+                          gradient: AppColors.blueGradient,
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
@@ -101,7 +107,7 @@ class _DashboardState extends State<Dashboard> {
                       width: rectangleWidth,
                       height: rectangleHeight,
                       decoration: BoxDecoration(
-                        color: AppColors.red,
+                        gradient: AppColors.redGradient,
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
