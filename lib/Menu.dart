@@ -41,14 +41,14 @@ class _MenuState extends State<Menu> {
     return Scaffold(
       backgroundColor: AppColors.scbgd,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Menu",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.blue),
         ),
         backgroundColor: AppColors.scbgd,
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.account_circle,
             ),
             iconSize: 32,
@@ -95,7 +95,7 @@ class _MenuState extends State<Menu> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MyWidget(),
+                      builder: (context) => const MyWidget(),
                     ),
                   );
                 }),
@@ -106,7 +106,7 @@ class _MenuState extends State<Menu> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MyWidget(),
+                      builder: (context) => const MyWidget(),
                     ),
                   );
                 }),
