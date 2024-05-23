@@ -6,10 +6,12 @@ class AppColors {
   static const Color white = Colors.white;
   static const Color black = Color.fromARGB(255, 214, 68, 68);
   static const Color red = Color.fromARGB(255, 236, 72, 93);
+  static const Color darkblue = Color.fromARGB(255, 28, 116, 232);
+  static const Color darkred = Color.fromARGB(255, 193, 0, 0);
 
   static const Gradient blueGradient = LinearGradient(
     colors: [
-      Color.fromARGB(255, 28, 116, 232),
+      AppColors.darkblue,
       AppColors.blue,
     ],
     begin: Alignment.topLeft,
@@ -18,7 +20,7 @@ class AppColors {
 
   static const Gradient redGradient = LinearGradient(
     colors: [
-      Color.fromARGB(255, 193, 0, 0),
+      AppColors.darkred,
       AppColors.red,
     ],
     begin: Alignment.topLeft,

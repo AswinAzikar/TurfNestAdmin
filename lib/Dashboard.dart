@@ -40,6 +40,7 @@ class _DashboardState extends State<Dashboard> {
               ),
           ),
         ),
+        automaticallyImplyLeading: false,
         backgroundColor: AppColors.scbgd,
         actions: [
           IconButton(

@@ -8,11 +8,12 @@ Widget buildProfileButton({
   required VoidCallback onPressed,
 }) {
   Color textColor = AppColors.white;
-  Color buttonColor = label == 'Turf Controls' || label == 'Turf History'
+  Color startColor = label == 'Turf Controls' || label == 'Turf History'
+      ? AppColors.darkblue
+      : AppColors.darkred;
+  Color endColor = label == 'Turf Controls' || label == 'Turf History'
       ? AppColors.blue
       : AppColors.red;
-
-  ;
 
   return Container(
     decoration: BoxDecoration(
@@ -27,8 +28,8 @@ Widget buildProfileButton({
       ],
       gradient: LinearGradient(
         colors: [
-          buttonColor,
-          buttonColor,
+          startColor,
+          endColor,
         ],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,

@@ -45,6 +45,7 @@ class _MenuState extends State<Menu> {
           "Menu",
           style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.blue),
         ),
+        automaticallyImplyLeading: false,
         backgroundColor: AppColors.scbgd,
         actions: [
           IconButton(
