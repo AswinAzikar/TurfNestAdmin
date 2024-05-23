@@ -67,7 +67,9 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                 child: TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Turf Owner Name',
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
                     fillColor: Colors.white,
                     filled: true,
                   ),
@@ -80,7 +82,9 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                 child: TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Turf Owner Email',
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
                     fillColor: Colors.white,
                     filled: true,
                   ),
@@ -96,7 +100,9 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                       child: TextFormField(
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
                           fillColor: Colors.white,
                           filled: true,
                         ),
@@ -109,7 +115,9 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                       child: TextFormField(
                         decoration: InputDecoration(
                           labelText: 'Confirm Password',
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
                           fillColor: Colors.white,
                           filled: true,
                         ),
@@ -126,7 +134,9 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                 child: TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Location of the Turf',
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
                     fillColor: Colors.white,
                     filled: true,
                     suffixIcon: ElevatedButton(
