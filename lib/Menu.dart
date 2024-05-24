@@ -3,6 +3,7 @@ import 'package:turfnest_admin/FeedbackScreen.dart';
 import 'package:turfnest_admin/TurfControl.dart';
 import 'package:turfnest_admin/constants.dart';
 import 'package:turfnest_admin/custom.dart';
+import 'package:turfnest_admin/routes.dart';
 import 'package:turfnest_admin/sports.dart';
 import 'Dashboard.dart';
 
@@ -83,10 +84,7 @@ class _MenuState extends State<Menu> {
               icon: Icons.sports_soccer,
               label: 'Sports',
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => SportsPage()),
-                );
+               Routes.instance.push(SportsPage(), context);
               },
             ),
             buildProfileButton(

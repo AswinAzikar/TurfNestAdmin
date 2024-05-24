@@ -45,6 +45,9 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   qr_flutter: ^4.1.0
   intl:
+  mobile_scanner: ^3.5.5
+  confetti: ^0.7.0
+  awesome_notifications: ^0.9.2
 
 dev_dependencies:
   flutter_test:
