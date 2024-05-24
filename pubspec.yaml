@@ -38,6 +38,13 @@ dependencies:
   fluttertoast: ^8.2.5
   curved_navigation_bar: ^1.0.3
   shared_preferences: ^2.2.3
+  
+  firebase_core: ^2.31.0
+  cloud_firestore: ^4.17.3
+  firebase_auth: ^4.19.5
+  flutter_launcher_icons: ^0.13.1
+  qr_flutter: ^4.1.0
+  intl:
 
 dev_dependencies:
   flutter_test:

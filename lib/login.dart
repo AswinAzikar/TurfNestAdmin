@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:turfnest_admin/HomeScreen.dart';
 import 'package:turfnest_admin/SignUp.dart';
 import 'package:turfnest_admin/constants.dart';
+import 'package:turfnest_admin/firebase_helper/auth_helper/auth_helper.dart';
+import 'package:turfnest_admin/routes.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,10 +15,15 @@ class _LoginPageState extends State<LoginPage> {
   late String _email = '', _password = '';
   bool _isLoading = false;
 
-  void _login() {
+  void _login()async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
-      Navigator.pushReplacementNamed(context, '/home');
+      bool login = await FirebaseAuthHelper.instance.login(
+                    _email, _password, context);
+
+                if (login) {
+                  Routes.instance.push(HomeScreen(), context);
+                }
     }
   }
 
@@ -56,6 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
                     }
+                    _email=value;
                     return null;
                   },
                 ),
@@ -75,6 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your password';
                     }
+                    _password=value;
                     return null;
                   },
                 ),

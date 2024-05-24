@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "789960705338",
+    "project_id": "turfapp-297a6",
+    "storage_bucket": "turfapp-297a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789960705338:android:6e4d49e07fbbb09af9fc03",
+        "android_client_info": {
+          "package_name": "com.example.turf_nest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC79_LSN0t_w32RtD9LBBkTnTFLi3virms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789960705338:android:227beb3e87f81f0df9fc03",
+        "android_client_info": {
+          "package_name": "com.example.turfnest_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC79_LSN0t_w32RtD9LBBkTnTFLi3virms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

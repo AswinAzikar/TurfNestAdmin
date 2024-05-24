@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:turfnest_admin/Menu.dart';
+
 
 import 'package:turfnest_admin/constants.dart';
+import 'package:turfnest_admin/firebase_helper/firestore_helper/firestore_helper.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -16,7 +17,52 @@ class _DashboardState extends State<Dashboard> {
   int rectangle2Count = 0;
   int flag = 1;
 
-  static const double commonSpace = 16.0; // Common space on both sides
+  static const double commonSpace = 16.0; 
+  
+  
+   bool isloading=true;
+  List<int> slots = [];
+
+  
+
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    Slots();
+   
+  }
+
+  String convertTo12HourFormat(int hour) {
+    String period = 'AM';
+    if (hour >= 12) {
+      period = 'PM';
+    }
+    if (hour > 12) {
+      hour -= 12;
+    }
+    return '$hour $period';
+  }
+
+   Slots() async {
+    setState(() {
+      isloading = true;
+    });
+    slots = await FirebaseFirestoreHelper.instance.confirmslots();
+    
+   
+    setState(() {
+      
+      isloading = false;
+    });
+  }
+  
+  
+  
+  
+  // Common space on both sides
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +167,7 @@ class _DashboardState extends State<Dashboard> {
                       ),
                       child: Center(
                         child: Text(
-                          'Available Slots: $b',
+                          'Available Slots: ${slots.length}',
                           style: TextStyle(color: Colors.white, fontSize: 20),
                           textAlign: TextAlign.center,
                         ),
@@ -278,7 +324,7 @@ class _DashboardState extends State<Dashboard> {
                                             1.5, // Aspect ratio of each grid item
                                       ),
                                       itemCount:
-                                          9, // Number of slots, adjust as needed
+                                          slots.length, // Number of slots, adjust as needed
                                       itemBuilder: (context, index) {
                                         // Generate grid items with time labels
                                         return Container(
@@ -289,7 +335,7 @@ class _DashboardState extends State<Dashboard> {
                                           ),
                                           child: Center(
                                             child: Text(
-                                              '${index + 1} PM', // Time label (example: 1 PM, 2 PM, ...)
+                                              slots[index].toString(), // Time label (example: 1 PM, 2 PM, ...)
                                               style: TextStyle(fontSize: 16),
                                             ),
                                           ),

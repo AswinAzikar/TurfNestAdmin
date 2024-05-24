@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:turfnest_admin/HomeScreen.dart';
 import 'package:turfnest_admin/constants.dart';
+import 'package:turfnest_admin/firebase_helper/auth_helper/auth_helper.dart';
+import 'package:turfnest_admin/routes.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -34,11 +37,21 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void _signUp() {
+  void _signUp()async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
       // Perform sign-up logic here
-      Navigator.pushReplacementNamed(context, '/home');
+      bool issignup = await FirebaseAuthHelper.instance.signup(
+      context,
+     _ownerName,
+      _ownerEmail,
+      _ownerLocation,
+      _ownerPassword,
+    );
+
+    if (issignup) {
+      Routes.instance.push(HomeScreen(), context);
+    }
     }
   }
 
@@ -58,116 +71,118 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
         child: Form(
           key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(height: screenHeight * 0.1),
-              FadeTransition(
-                opacity: _animation,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Turf Owner Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(height: screenHeight * 0.1),
+                FadeTransition(
+                  opacity: _animation,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Turf Owner Name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      fillColor: Colors.white,
+                      filled: true,
                     ),
-                    fillColor: Colors.white,
-                    filled: true,
+                    onSaved: (value) => _ownerName = value!,
                   ),
-                  onSaved: (value) => _ownerName = value!,
                 ),
-              ),
-              SizedBox(height: screenHeight * 0.03),
-              FadeTransition(
-                opacity: _animation,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Turf Owner Email',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                SizedBox(height: screenHeight * 0.03),
+                FadeTransition(
+                  opacity: _animation,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Turf Owner Email',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      fillColor: Colors.white,
+                      filled: true,
                     ),
-                    fillColor: Colors.white,
-                    filled: true,
+                    onSaved: (value) => _ownerEmail = value!,
                   ),
-                  onSaved: (value) => _ownerEmail = value!,
                 ),
-              ),
-              SizedBox(height: screenHeight * 0.03),
-              FadeTransition(
-                opacity: _animation,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.0),
+                SizedBox(height: screenHeight * 0.03),
+                FadeTransition(
+                  opacity: _animation,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            fillColor: Colors.white,
+                            filled: true,
                           ),
-                          fillColor: Colors.white,
-                          filled: true,
+                          onSaved: (value) => _ownerPassword = value!,
+                          obscureText: true,
                         ),
-                        onSaved: (value) => _ownerPassword = value!,
-                        obscureText: true,
                       ),
-                    ),
-                    SizedBox(width: screenWidth * 0.02),
-                    Expanded(
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          labelText: 'Confirm Password',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.0),
+                      SizedBox(width: screenWidth * 0.02),
+                      Expanded(
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'Confirm Password',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            fillColor: Colors.white,
+                            filled: true,
                           ),
-                          fillColor: Colors.white,
-                          filled: true,
+                          onSaved: (value) => _ownerConfirmPassword = value!,
+                          obscureText: true,
                         ),
-                        onSaved: (value) => _ownerConfirmPassword = value!,
-                        obscureText: true,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: screenHeight * 0.03),
-              FadeTransition(
-                opacity: _animation,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Location of the Turf',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    fillColor: Colors.white,
-                    filled: true,
-                    suffixIcon: ElevatedButton(
-                      onPressed: () {
-                        // Add code here to get location using GPS
-                      },
-                      child: Icon(Icons.gps_fixed, color: AppColors.blue),
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: AppColors.blue,
-                        backgroundColor: AppColors.white,
-                        padding: EdgeInsets.zero,
-                        shape: CircleBorder(),
-                      ),
-                    ),
-                  ),
-                  onSaved: (value) => _ownerLocation = value!,
-                ),
-              ),
-              SizedBox(height: screenHeight * 0.03),
-              FadeTransition(
-                opacity: _animation,
-                child: ElevatedButton(
-                  onPressed: _signUp,
-                  child: Text('Sign Up'),
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.blue,
+                    ],
                   ),
                 ),
-              ),
-            ],
+                SizedBox(height: screenHeight * 0.03),
+                FadeTransition(
+                  opacity: _animation,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Location of the Turf',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      fillColor: Colors.white,
+                      filled: true,
+                      suffixIcon: ElevatedButton(
+                        onPressed: () {
+                          // Add code here to get location using GPS
+                        },
+                        child: Icon(Icons.gps_fixed, color: AppColors.blue),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: AppColors.blue,
+                          backgroundColor: AppColors.white,
+                          padding: EdgeInsets.zero,
+                          shape: CircleBorder(),
+                        ),
+                      ),
+                    ),
+                    onSaved: (value) => _ownerLocation = value!,
+                  ),
+                ),
+                SizedBox(height: screenHeight * 0.03),
+                FadeTransition(
+                  opacity: _animation,
+                  child: ElevatedButton(
+                    onPressed: _signUp,
+                    child: Text('Sign Up'),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.blue,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
