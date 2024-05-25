@@ -4,14 +4,43 @@ import 'package:fluttertoast/fluttertoast.dart';
 class AppColors {
   static const Color blue = Color.fromARGB(255, 87, 150, 232);
   static const Color white = Colors.white;
+<<<<<<< HEAD
   static const Color black = Colors.black;
   static const Color red = Color.fromARGB(255, 223, 65, 86);
+=======
+  static const Color black = Color.fromARGB(255, 214, 68, 68);
+  static const Color red = Color.fromARGB(255, 236, 72, 93);
+  static const Color darkblue = Color.fromARGB(255, 28, 116, 232);
+  static const Color darkred = Color.fromARGB(255, 193, 0, 0);
+
+  static const Gradient blueGradient = LinearGradient(
+    colors: [
+      AppColors.darkblue,
+      AppColors.blue,
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  static const Gradient redGradient = LinearGradient(
+    colors: [
+      AppColors.darkred,
+      AppColors.red,
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+>>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
   static const Color green = Color.fromARGB(255, 67, 222, 72);
   static const Color grey = Colors.grey;
   static const Color white2 = Color.fromARGB(236, 35, 133, 214);
   static const Color gradientStartColor = Color.fromARGB(255, 231, 233, 241);
   static const Color gradientEndColor = AppColors.white;
+<<<<<<< HEAD
   static const Color scbgd = Color.fromARGB(255, 229, 248, 249);
+=======
+  static const Color scbgd = Color.fromARGB(255, 236, 239, 233);
+>>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
 }
 
 class ButtonStyles {
