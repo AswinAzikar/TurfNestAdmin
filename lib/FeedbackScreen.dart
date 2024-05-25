@@ -1,134 +1,87 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:turfnest_admin/HomeScreen.dart';
+import 'package:turfnest_admin/Menu.dart';
+
 import 'package:turfnest_admin/constants.dart';
 import 'package:turfnest_admin/firebase_helper/firestore_helper/firestore_helper.dart';
+import 'package:turfnest_admin/models/feedback_model.dart';
 import 'package:turfnest_admin/models/sportsmodel.dart';
+import 'package:turfnest_admin/routes.dart';
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+class FeedbackPage extends StatefulWidget {
+  const FeedbackPage({super.key});
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<FeedbackPage> createState() => _MyWidgetState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
-   List<Spoert_model> fullsports = [];
-  double animatedContainerHeight = 0;
-  bool isAnimatedWidgetVisible = false;
+class _MyWidgetState extends State<FeedbackPage> {
+  List<feedback_model> fullfeedback = [];
 
-  Spoert_model? singlesport;
-  
+  feedback_model? singlefeedback;
+
   @override
   void initState() {
     super.initState();
-    
+
     getsport();
   }
 
-
-
   getsport() async {
-   
-    fullsports = await FirebaseFirestoreHelper.instance.getsports();
-
-   
+    fullfeedback = await FirebaseFirestoreHelper.instance.getfeedback();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      
-      body: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      "Booked Tickets",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.blue),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height:5),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: List.generate(
-                                    fullsports.length,
-                                    (index) {
-
-
-                                      singlesport = fullsports[index];
-                                      return GestureDetector(
-                                      onTap: () {
-                                        // Handle tap for each item in the list
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.only(
-                                            bottom:10),
-                                        padding: EdgeInsets.all(8),
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey.shade200,
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                      'Time:${singlesport!.game}'), 
-                                                       Text(
-                                                      'Ticket: ${singlesport!.price}'), // Time
-                                                 // Username
-                                                 
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(width: 10),
-                                            Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 10, vertical: 4),
-                                              decoration: BoxDecoration(
-                                                color:
-                                                     Colors
-                                                        .red, // Active or Expired
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              child: Text(
-                                               "delete",
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                           // Show scanner button for active items
-                                              IconButton(
-                                                icon: Icon(Icons
-                                                    .edit),
-                                                onPressed: () {
-                                                  
-                                                  // Handle scanner button tap
-                                                },
-                                              ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                    }
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),);
+      appBar: AppBar(
+         leading: IconButton(
+    icon: Icon(Icons.arrow_back, color: AppColors.blue),
+    onPressed: () {
+      Routes.instance.push(HomeScreen(), context);
+    },
+  ),
+        title: Text(
+          "FEEDBACKS",
+          style: TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(13.0),
+          child: Column(
+            children: List.generate(fullfeedback.length, (index) {
+              singlefeedback = fullfeedback[index];
+              return Container(
+                margin: EdgeInsets.only(bottom: 10),
+                padding: EdgeInsets.all(13),
+                decoration: BoxDecoration(
+                  border: Border.all(width: 2),
+                  color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('email:${singlefeedback!.email}'),
+                          Text('Phone: ${singlefeedback!.phone}'), // Time
+                          Text('content: ${singlefeedback!.content}'),
+                          // Username
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }),
+          ),
+        ),
+      ),
+    );
   }
 }

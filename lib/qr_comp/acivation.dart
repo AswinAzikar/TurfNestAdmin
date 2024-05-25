@@ -241,7 +241,8 @@ class _studentlistState extends State<studentlist> {
                                       print(singlestudent!.id);
                                       bool a = await FirebaseFirestoreHelper
                                           .instance
-                                          .expireTicket(singlestudent!.id,singlestudent!.ticketid);
+                                          .expireTicket(singlestudent!.id,
+                                              singlestudent!.ticketid);
 
                                       if (a) {
                                         _controller.play();

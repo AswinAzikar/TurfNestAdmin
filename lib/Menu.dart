@@ -94,7 +94,7 @@ class _MenuState extends State<Menu> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const MyWidget(),
+                      builder: (context) => const FeedbackPage(),
                     ),
                   );
                 }),
@@ -105,7 +105,7 @@ class _MenuState extends State<Menu> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const MyWidget(),
+                      builder: (context) => const FeedbackPage(),
                     ),
                   );
                 }),

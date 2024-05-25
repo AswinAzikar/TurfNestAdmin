@@ -1,10 +1,11 @@
-import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:intl/intl.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turfnest_admin/constants.dart';
+import 'package:turfnest_admin/models/feedback_model.dart';
 import 'package:turfnest_admin/models/sportsmodel.dart';
 import 'package:turfnest_admin/models/ticketmodel.dart';
 
@@ -278,6 +279,72 @@ Future<bool> expireTicket(String id,int ticketnumber) async {
     }
   } catch (e) {
     print('Failed to delete game: $e');
+    return false;
+  }
+}
+
+
+ Future<List<feedback_model>> getfeedback() async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> querrysnapshot =
+          await _firebaseFirestore
+              .collection("feedback")
+              
+              .get();
+
+      List<feedback_model> boardingrequestdetails = querrysnapshot.docs
+          .map((e) => feedback_model.fromJson(e.data()))
+          .toList();
+      return boardingrequestdetails;
+    } catch (e) {
+      showmessage(e.toString());
+      print(e.toString());
+      return [];
+    }
+  }
+  Future<void> addgame(
+      String game, String price) async {
+   
+    _firebaseFirestore.collection("games").add({
+      "game": game,
+      "price":price,
+      
+    });
+  }
+
+
+  
+Future<bool> editcost(String game,String price) async {
+  // Reference to the Firestore instance
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  try {
+    // Query the collection 'bookedtickets' where 'ticketnumber' matches the provided ticketNumber
+    QuerySnapshot querySnapshot = await firestore
+        .collection('games')
+        .where('game', isEqualTo: game)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      // Assuming ticket numbers are unique, we take the first matched document
+      DocumentSnapshot documentSnapshot = querySnapshot.docs.first;
+      
+      // Get the document ID
+      String docId = documentSnapshot.id;
+
+      // Update the 'status' field to 'expired'
+      await firestore.collection('games').doc(docId).update({
+        'price': price,
+      });
+
+      print('Ticket status updated to expired.');
+      return true;
+    } else {
+      print('No ticket found with the given ticket number.');
+      return false;
+    }
+  } catch (e) {
+    print('Failed to update ticket status: $e');
     return false;
   }
 }
