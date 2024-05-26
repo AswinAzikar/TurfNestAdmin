@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:turfnest_admin/Menu.dart';
-import 'package:turfnest_admin/addgame.dart';
+import 'addgame.dart';
 import 'package:turfnest_admin/constants.dart';
-import 'package:turfnest_admin/editcost.dart';
+import 'editcost.dart';
 import 'package:turfnest_admin/firebase_helper/firestore_helper/firestore_helper.dart';
 import 'package:turfnest_admin/models/sportsmodel.dart';
 import 'package:turfnest_admin/routes.dart';
@@ -32,18 +32,20 @@ class _MyWidgetState extends State<SportsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         leading: IconButton(
-    icon: Icon(Icons.arrow_back, color: AppColors.blue),
-    onPressed: () {
-      Navigator.of(context).pop();
-    },
-  ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: AppColors.blue),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: Text(
           "GAMES",
           style: TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold),
         ),
       ),
-      floatingActionButton: FloatingActionButton(backgroundColor: AppColors.blue,foregroundColor: AppColors.white,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.blue,
+        foregroundColor: AppColors.white,
         onPressed: () {
           Routes.instance.push(AddGame(), context);
         },
@@ -106,7 +108,8 @@ class _MyWidgetState extends State<SportsPage> {
                     IconButton(
                       icon: Icon(Icons.edit),
                       onPressed: () {
-                        Routes.instance.push(EditCost(game: singlesport.game), context);
+                        Routes.instance
+                            .push(EditCost(game: singlesport.game), context);
                       },
                     ),
                   ],
