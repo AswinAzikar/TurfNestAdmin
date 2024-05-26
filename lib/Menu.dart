@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turfnest_admin/FeedbackScreen.dart';
+import 'package:turfnest_admin/HomeScreen.dart';
 import 'package:turfnest_admin/Sports/sports.dart';
 import 'package:turfnest_admin/constants.dart';
 import 'package:turfnest_admin/custom.dart';
@@ -56,7 +57,12 @@ class _MenuState extends State<Menu> {
             ),
             iconSize: 32,
             onPressed: () {
-              // Handle user icon button press
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+              );
             },
           ),
         ],
