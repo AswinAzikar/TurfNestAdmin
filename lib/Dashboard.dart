@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:flutter/widgets.dart';
-import 'package:turfnest_admin/capsuleButton.dart';
-import 'package:turfnest_admin/constants.dart';
-=======
-
 
 import 'package:turfnest_admin/constants.dart';
 import 'package:turfnest_admin/firebase_helper/firestore_helper/firestore_helper.dart';
 import 'package:turfnest_admin/models/ticketmodel.dart';
 import 'package:turfnest_admin/qr_comp/qrpage.dart';
 import 'package:turfnest_admin/routes.dart';
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -21,15 +14,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-<<<<<<< HEAD
-  int rectangle1Count = 0;
-  int rectangle2Count = 0;
-  int flag = 1;
-  var Aswin = 0;
-
-  static const double commonSpace = 16.0; // Common space on both sides
-=======
-   List<ticket_Model> tickethistory = [];
+  List<ticket_Model> tickethistory = [];
   double animatedContainerHeight = 0;
   bool isAnimatedWidgetVisible = false;
 
@@ -42,7 +27,6 @@ class _DashboardState extends State<Dashboard> {
 
   bool isloading = true;
   List<int> slots = [];
- 
 
   @override
   void initState() {
@@ -85,7 +69,6 @@ class _DashboardState extends State<Dashboard> {
   }
 
   // Common space on both sides
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
 
   @override
   Widget build(BuildContext context) {
@@ -101,10 +84,6 @@ class _DashboardState extends State<Dashboard> {
       appBar: AppBar(
         title: Text(
           "Dashboard",
-<<<<<<< HEAD
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-=======
           style: TextStyle(
             fontWeight: FontWeight.bold,
             foreground: Paint()
@@ -114,7 +93,6 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
         automaticallyImplyLeading: false,
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
         backgroundColor: AppColors.scbgd,
         actions: [
           IconButton(
@@ -130,24 +108,8 @@ class _DashboardState extends State<Dashboard> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-<<<<<<< HEAD
-        children: [
-          Center(
-            child: ToggleButtonWidget(
-              onPressed: () {
-                if (page == 1) {
-                  Navigator.pushNamed(context, '/menu');
-                } else {
-                  Navigator.pushNamed(context, '/dashboard');
-                }
-                setState(() {});
-              },
-            ),
-          ),
-=======
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
           SizedBox(height: .005 * screenHeight),
           Stack(
             alignment: Alignment.topCenter,
@@ -166,11 +128,7 @@ class _DashboardState extends State<Dashboard> {
                         width: rectangleWidth,
                         height: rectangleHeight,
                         decoration: BoxDecoration(
-<<<<<<< HEAD
-                          color: Colors.blue,
-=======
                           gradient: AppColors.blueGradient,
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
@@ -183,11 +141,7 @@ class _DashboardState extends State<Dashboard> {
                         ),
                         child: Center(
                           child: Text(
-<<<<<<< HEAD
-                            'Today\'s booking: $a',
-=======
                             'Today\'s booking: ${tickethistory.length}',
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
                             style: TextStyle(color: Colors.white, fontSize: 20),
                             textAlign: TextAlign.center,
                           ),
@@ -206,11 +160,7 @@ class _DashboardState extends State<Dashboard> {
                       width: rectangleWidth,
                       height: rectangleHeight,
                       decoration: BoxDecoration(
-<<<<<<< HEAD
-                        color: AppColors.red,
-=======
                         gradient: AppColors.redGradient,
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
@@ -223,11 +173,7 @@ class _DashboardState extends State<Dashboard> {
                       ),
                       child: Center(
                         child: Text(
-<<<<<<< HEAD
-                          'Available Slots: $b',
-=======
                           'Available Slots: ${slots.length}',
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
                           style: TextStyle(color: Colors.white, fontSize: 20),
                           textAlign: TextAlign.center,
                         ),
@@ -269,29 +215,17 @@ class _DashboardState extends State<Dashboard> {
                                 SizedBox(height: 0.02 * screenHeight),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: List.generate(
-<<<<<<< HEAD
-                                    4,
-                                    (index) => GestureDetector(
-=======
-                                    tickethistory.length,
-                                    (index) {
-
-
-                                      singlehistory = tickethistory[index];
-                                      return GestureDetector(
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
+                                  children: List.generate(tickethistory.length,
+                                      (index) {
+                                    singlehistory = tickethistory[index];
+                                    return GestureDetector(
                                       onTap: () {
                                         // Handle tap for each item in the list
                                       },
                                       child: Container(
                                         margin: EdgeInsets.only(
                                             bottom: 0.01 * screenHeight),
-<<<<<<< HEAD
-                                        padding: EdgeInsets.all(10),
-=======
                                         padding: EdgeInsets.all(8),
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
                                         decoration: BoxDecoration(
                                           color: Colors.grey.shade200,
                                           borderRadius:
@@ -307,44 +241,36 @@ class _DashboardState extends State<Dashboard> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-<<<<<<< HEAD
-                                                      'Time: 10:00 AM'), // Time
+                                                      'Time:${singlehistory!.time}'),
                                                   Text(
-                                                      'Username: John Doe'), // Username
-                                                  Text(
-                                                      'Mobile: +1234567890'), // Mobile number
-                                                  Text(
-                                                      'Ticket: 123456'), // Ticket number
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(width: 0.09 * screenWidth),
-=======
-                                                      'Time:${singlehistory!.time}'), 
-                                                       Text(
                                                       'Ticket: ${singlehistory!.ticketid}'), // Time
-                                                 // Username
+                                                  // Username
                                                   Text(
-                                                      'Mobile:${singlehistory!.phone}'), 
-                                                       Text(
-                                                      'Email:${singlehistory!.email}',style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold)), // Mobile number
-                                                 
-                                                      Text(
-                                                      'Booking time: ${singlehistory!.bookingtime.substring(0,11)}',style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),), // Ticket number
+                                                      'Mobile:${singlehistory!.phone}'),
+                                                  Text(
+                                                      'Email:${singlehistory!.email}',
+                                                      style: TextStyle(
+                                                          fontSize: 10,
+                                                          fontWeight: FontWeight
+                                                              .bold)), // Mobile number
+
+                                                  Text(
+                                                    'Booking time: ${singlehistory!.bookingtime.substring(0, 11)}',
+                                                    style: TextStyle(
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ), // Ticket number
                                                 ],
                                               ),
                                             ),
                                             SizedBox(width: 0.03 * screenWidth),
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
                                             Container(
                                               padding: EdgeInsets.symmetric(
                                                   horizontal: 10, vertical: 4),
                                               decoration: BoxDecoration(
-<<<<<<< HEAD
-                                                color: index % 2 == 0
-=======
-                                                color: singlehistory!.status=="active"
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
+                                                color: singlehistory!.status ==
+                                                        "active"
                                                     ? Colors.green
                                                     : Colors
                                                         .red, // Active or Expired
@@ -352,44 +278,27 @@ class _DashboardState extends State<Dashboard> {
                                                     BorderRadius.circular(5),
                                               ),
                                               child: Text(
-<<<<<<< HEAD
-                                                index % 2 == 0
-                                                    ? 'Active'
-                                                    : 'Expired',
-=======
                                                 singlehistory!.status,
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
                                                 style: TextStyle(
                                                     color: Colors.white),
                                               ),
                                             ),
-<<<<<<< HEAD
-                                            if (index % 2 ==
-                                                0) // Show scanner button for active items
-=======
-                                            if (singlehistory!.status=="active") // Show scanner button for active items
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
+                                            if (singlehistory!.status ==
+                                                "active") // Show scanner button for active items
                                               IconButton(
                                                 icon: Icon(Icons
                                                     .qr_code_scanner_outlined),
                                                 onPressed: () {
-<<<<<<< HEAD
-=======
-                                                  Routes.instance.push(ScanCodePage(), context);
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
+                                                  Routes.instance.push(
+                                                      ScanCodePage(), context);
                                                   // Handle scanner button tap
                                                 },
                                               ),
                                           ],
                                         ),
                                       ),
-<<<<<<< HEAD
-                                    ),
-=======
                                     );
-                                    }
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
-                                  ),
+                                  }),
                                 ),
                               ],
                             ),
@@ -435,13 +344,8 @@ class _DashboardState extends State<Dashboard> {
                                         childAspectRatio:
                                             1.5, // Aspect ratio of each grid item
                                       ),
-<<<<<<< HEAD
-                                      itemCount:
-                                          9, // Number of slots, adjust as needed
-=======
                                       itemCount: slots
                                           .length, // Number of slots, adjust as needed
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
                                       itemBuilder: (context, index) {
                                         // Generate grid items with time labels
                                         return Container(
@@ -452,12 +356,8 @@ class _DashboardState extends State<Dashboard> {
                                           ),
                                           child: Center(
                                             child: Text(
-<<<<<<< HEAD
-                                              '${index + 1} PM', // Time label (example: 1 PM, 2 PM, ...)
-=======
                                               slots[index]
                                                   .toString(), // Time label (example: 1 PM, 2 PM, ...)
->>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
                                               style: TextStyle(fontSize: 16),
                                             ),
                                           ),

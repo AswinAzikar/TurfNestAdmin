@@ -43,71 +43,98 @@ class _LoginPageState extends State<AddGame> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'ADD GAME',
-                  style: TextStyle(
+                // Red header section
+                Container(
+                  width: screenWidth,
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
                     color: AppColors.red,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: Text(
+                    'ADD GAME',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.05),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Sports Name',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                // White form section
+                Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30),
                     ),
-                    filled: true,
-                    fillColor: Colors.white,
                   ),
-                  onSaved: (value) => game = value!,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter Sports Name';
-                    }
-                    game = value;
-                    return null;
-                  },
-                ),
-                SizedBox(height: screenHeight * 0.03),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'price',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white,
-                  ),
-                  onSaved: (value) => price = value!,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter price';
-                    }
-                    price = value;
-                    return null;
-                  },
-                ),
-                SizedBox(height: screenHeight * 0.03),
-                ElevatedButton(
-                  onPressed: _login,
-                  child: _isLoading
-                      ? CircularProgressIndicator(
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.white),
-                        )
-                      : Text('Add'),
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: AppColors.blue,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.25,
-                      vertical: 15.0,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Sports Name',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                        ),
+                        onSaved: (value) => game = value!,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter Sports Name';
+                          }
+                          game = value;
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: screenHeight * 0.03),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'price',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                        ),
+                        onSaved: (value) => price = value!,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter price';
+                          }
+                          price = value;
+                          return null;
+                        },
+                      ),
+                      SizedBox(height: screenHeight * 0.03),
+                      ElevatedButton(
+                        onPressed: _login,
+                        child: _isLoading
+                            ? CircularProgressIndicator(
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.white),
+                              )
+                            : Text('Add'),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: AppColors.blue,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.25,
+                            vertical: 15.0,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
