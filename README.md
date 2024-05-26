@@ -6,10 +6,6 @@ A new Flutter project.
 
 ## Getting Started
 
-<<<<<<< HEAD
-This project is a starting point for a Flutter application.
-
-=======
 
 
 
