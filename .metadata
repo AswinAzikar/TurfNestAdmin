@@ -18,6 +18,7 @@ migration:
     - platform: android
       create_revision: 54e66469a933b60ddf175f858f82eaeb97e48c8d
       base_revision: 54e66469a933b60ddf175f858f82eaeb97e48c8d
+<<<<<<< HEAD
     - platform: ios
       create_revision: 54e66469a933b60ddf175f858f82eaeb97e48c8d
       base_revision: 54e66469a933b60ddf175f858f82eaeb97e48c8d
@@ -33,6 +34,8 @@ migration:
     - platform: windows
       create_revision: 54e66469a933b60ddf175f858f82eaeb97e48c8d
       base_revision: 54e66469a933b60ddf175f858f82eaeb97e48c8d
+=======
+>>>>>>> 3a8db8fe0cb95fd1eb809e16487f9e61737faf2e
 
   # User provided section
 
