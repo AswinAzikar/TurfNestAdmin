@@ -17,11 +17,8 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-  int _selectedIndex = 0;
-
   void onToggle(int index) {
     setState(() {
-      _selectedIndex = index;
       if (index == 1) {
         Navigator.push(
           context,
