@@ -16,9 +16,8 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
   late String _ownerName = '',
       _ownerEmail = '',
       _ownerPassword = '',
-      _ownerConfirmPassword = '',
       _ownerLocation = '';
-  bool _isLoading = false;
+
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -39,32 +38,30 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void _signUp()async {
-    bool a=await FirebaseFirestoreHelper.instance.isAdminCollectionEmpty();
+  void _signUp() async {
+    bool a = await FirebaseFirestoreHelper.instance.isAdminCollectionEmpty();
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
-      if(a){
-         bool issignup = await FirebaseAuthHelper.instance.signup(
-      context,
-     _ownerName,
-      _ownerEmail,
-      _ownerLocation,
-      _ownerPassword,
-    );
-    
-    if (issignup) {
-      Routes.instance.push(HomeScreen(), context);
-    }
+      if (a) {
+        bool issignup = await FirebaseAuthHelper.instance.signup(
+          context,
+          _ownerName,
+          _ownerEmail,
+          _ownerLocation,
+          _ownerPassword,
+        );
 
+        if (issignup) {
+          Routes.instance.push(HomeScreen(), context);
+        }
       }
-
-      
-     
-
-    }
-    else{
-      showCustomDialog(context: context, content: "Registration limit reached", buttonText: "ok", navigateFrom: LoginPage(), title: "Warning");
-
+    } if(a==false) {
+      showCustomDialog(
+          context: context,
+          content: "Registration limit reached",
+          buttonText: "ok",
+          navigateFrom: LoginPage(),
+          title: "Warning");
     }
   }
 
@@ -148,7 +145,6 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                             fillColor: Colors.white,
                             filled: true,
                           ),
-                          onSaved: (value) => _ownerConfirmPassword = value!,
                           obscureText: true,
                         ),
                       ),
@@ -201,6 +197,4 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
       ),
     );
   }
-
-  
 }

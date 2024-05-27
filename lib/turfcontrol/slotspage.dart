@@ -4,8 +4,6 @@ import 'package:turfnest_admin/HomeScreen.dart';
 import 'package:turfnest_admin/constants.dart';
 import 'package:turfnest_admin/firebase_helper/firestore_helper/firestore_helper.dart';
 
-import 'package:turfnest_admin/routes.dart';
-
 class BookingScreen extends StatefulWidget {
   final DateTime date;
 

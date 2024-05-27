@@ -26,7 +26,6 @@ class _studentlistState extends State<studentlist> {
   bool isloading = false;
   List<ticket_Model> tickethistory = [];
 
-  ticket_Model? singlehistory;
   List<String>? both_id_and_Qr;
   String? studentPhoto;
   ticket_Model? singlestudent;
@@ -238,22 +237,24 @@ class _studentlistState extends State<studentlist> {
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: AppColors.blue),
                                     onPressed: () async {
-                                         await FirebaseFirestoreHelper
-                                          .instance
-                                          .addTurfHistory(singlestudent!.id,
-                                              singlestudent!.ticketid,singlestudent!.email,singlehistory!.sport,singlehistory!.phone,singlehistory!.price,singlehistory!.date,singlehistory!.time);
-                                     
+                                      await FirebaseFirestoreHelper.instance
+                                          .addTurfHistory(
+                                              singlestudent!.id,
+                                              singlestudent!.ticketid,
+                                              singlestudent!.email,
+                                              singlestudent!.sport,
+                                              singlestudent!.phone,
+                                              singlestudent!.price,
+                                              singlestudent!.date,
+                                              singlestudent!.time);
+
                                       bool a = await FirebaseFirestoreHelper
                                           .instance
                                           .expireTicket(singlestudent!.id,
                                               singlestudent!.ticketid);
 
-
-                                           
-
                                       if (a) {
                                         _controller.play();
-
 
                                         sendnotification(
                                             "Slot activated sucessfully",

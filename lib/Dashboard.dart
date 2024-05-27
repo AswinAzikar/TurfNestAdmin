@@ -76,9 +76,7 @@ class _DashboardState extends State<Dashboard> {
     double screenWidth = MediaQuery.of(context).size.width;
     double rectangleHeight = screenHeight * 0.13;
     double rectangleWidth = screenWidth * 0.9;
-    var a = 5;
-    var b = 7;
-    var page = 1;
+   
     return Scaffold(
       backgroundColor: AppColors.scbgd,
       appBar: AppBar(
@@ -241,7 +239,7 @@ class _DashboardState extends State<Dashboard> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                      'Time:${singlehistory!.time}'),
+                                                      '${convertTo12HourFormat(singlehistory!.time)} - ${convertTo12HourFormat(singlehistory!.time + 1)}'),
                                                   Text(
                                                       'Ticket: ${singlehistory!.ticketid}'), // Time
                                                   // Username

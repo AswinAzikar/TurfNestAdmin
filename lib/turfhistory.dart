@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:turfnest_admin/HomeScreen.dart';
 
-
 import 'package:turfnest_admin/constants.dart';
 import 'package:turfnest_admin/firebase_helper/firestore_helper/firestore_helper.dart';
-import 'package:turfnest_admin/models/feedback_model.dart';
+
 import 'package:turfnest_admin/models/turfhistorymodel.dart';
 
 import 'package:turfnest_admin/routes.dart';
@@ -33,16 +32,28 @@ class _MyWidgetState extends State<TurfhistoryPage> {
     setState(() {});
   }
 
+    String convertTo12HourFormat(int hour) {
+    String period = 'AM';
+    if (hour >= 12) {
+      period = 'PM';
+    }
+    if (hour > 12) {
+      hour -= 12;
+    }
+    return '$hour $period';
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         leading: IconButton(
-    icon: Icon(Icons.arrow_back, color: AppColors.blue),
-    onPressed: () {
-      Routes.instance.push(HomeScreen(), context);
-    },
-  ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: AppColors.blue),
+          onPressed: () {
+            Routes.instance.push(HomeScreen(), context);
+          },
+        ),
         title: Text(
           "HISTORY",
           style: TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold),
@@ -70,12 +81,13 @@ class _MyWidgetState extends State<TurfhistoryPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Ticket Id: ${singlehistory!.ticketid}'),
-                          Text('email:${singlehistory!.email}'),
+                          Text('Email:${singlehistory!.email}'),
                           Text('Phone: ${singlehistory!.phone}'), // Time
-                          Text('Time: ${singlehistory!.time}'),
-                          Text('Date: ${singlehistory!.date}'),
+                          Text( '${convertTo12HourFormat(singlehistory!.time)} - ${convertTo12HourFormat(singlehistory!.time + 1)}'),
+                          Text('Date: ${singlehistory!.date.substring(0,11)}'),
                           Text('Sport: ${singlehistory!.sport}'),
-                          Text('Activation time: ${singlehistory!.activationTime}'),
+                          Text(
+                              'Activation time: ${singlehistory!.activationTime.substring(0,19)}'),
                           // Username
                         ],
                       ),

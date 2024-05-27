@@ -414,23 +414,30 @@ class FirebaseFirestoreHelper {
     _firebaseFirestore.collection("holidays").add({"date": date, "time": time});
   }
 
-  addTurfHistory(String id, int ticketid, String email, String sport,
-      String phone, String price, String date, int time) {
-    final DateTime now = DateTime.now();
-    final String formattedDateTime = now.toIso8601String();
+ addTurfHistory(String id, int ticketid, String email, String sport,
+      String phone, String price, String date, int time) async {
+    try {
+      final DateTime now = DateTime.now();
+      final String formattedDateTime = now.toIso8601String();
 
-    _firebaseFirestore.collection("turfhistory").add({
-      "id": id,
-      "ticketid": ticketid,
-      "email": email,
-      "sport": sport,
-      "phone": phone,
-      "price": price,
-      "activationTime": formattedDateTime,
-      "date": date,
-      "time": time
-    });
+      await _firebaseFirestore.collection("turfhistory").add({
+        "id": id,
+        "ticketid": ticketid,
+        "email": email,
+        "sport": sport,
+        "phone": phone,
+        "price": price,
+        "activationTime": formattedDateTime,
+        "date": date,
+        "time": time
+      });
+
+      print('Turf history added successfully.');
+    } catch (e) {
+      print('Failed to add turf history: $e');
+    }
   }
+
 
   Future<List<turfhistory_model>> getTurfHistory() async {
     try {
