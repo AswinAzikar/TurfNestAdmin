@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:turfnest_admin/HomeScreen.dart';
-import 'package:turfnest_admin/Menu.dart';
+
 import 'package:turfnest_admin/constants.dart';
-import 'package:turfnest_admin/firebase_helper/firestore_helper/firestore_helper.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:turfnest_admin/routes.dart';
+
 import 'package:intl/intl.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:turfnest_admin/turfcontrol/slotspage.dart';
 
 class TurfControlPage extends StatefulWidget {
   const TurfControlPage({super.key});
@@ -18,29 +18,8 @@ class _TurfControlPageState extends State<TurfControlPage> {
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
   TimeOfDay? selectedTime1;
-  String? _selectedSport;
-  List<String> _sports = [];
+
   static List<String> disabledDates = ['2024-05-2', '2024-12-25'];
-
-  Future<void> launchMaps(String destination) async {
-    String url =
-        'https://www.google.com/maps/dir/?api=1&destination=$destination';
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
-    } else {
-      throw 'Could not launch maps with destination $destination';
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getgames();
-  }
-
-  void getgames() async {
-    //  _sports = await FirebaseFirestoreHelper.instance.getAllGames();
-  }
 
   Future<void> _selectDate(
       BuildContext context, List<String> disabledDates) async {
@@ -48,7 +27,7 @@ class _TurfControlPageState extends State<TurfControlPage> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 365)),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
       selectableDayPredicate: (DateTime date) {
         return !disabledDates.contains(_formatDate(date));
       },
@@ -73,7 +52,6 @@ class _TurfControlPageState extends State<TurfControlPage> {
 
     return Scaffold(
       appBar: AppBar(
-        //sports = await FirebaseFirestoreHelper.instance.getAllGames()
         title: Text('Turf Controls',
             style:
                 TextStyle(color: AppColors.white, fontWeight: FontWeight.bold)),
@@ -109,7 +87,7 @@ class _TurfControlPageState extends State<TurfControlPage> {
               left: 0.07 * screenWidth,
               right: 0.07 * screenWidth,
               child: Container(
-                height: 0.40 * screenHeight,
+                height: 0.20 * screenHeight,
                 width: 0.7 * screenWidth,
                 decoration: BoxDecoration(
                   color: AppColors.white,
@@ -128,24 +106,6 @@ class _TurfControlPageState extends State<TurfControlPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Turf Location',
-                        style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: .01 * screenHeight),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          launchMaps('Kayamkulam');
-                        },
-                        style: ButtonStyles.styleFromWhiteRed(),
-                        icon: const Icon(Icons.location_pin),
-                        label: const Text(
-                          'Kayamkulam',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 15),
-                        ),
-                      ),
                       const Text('Date',
                           style: TextStyle(
                               fontSize: 12, fontWeight: FontWeight.bold)),
@@ -174,91 +134,45 @@ class _TurfControlPageState extends State<TurfControlPage> {
                           ),
                         ],
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Select Sport',
-                            style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: .01 * screenHeight),
-                          DropdownButtonFormField<String>(
-                            value: _selectedSport,
-                            items: _sports.map((sport) {
-                              return DropdownMenuItem<String>(
-                                value: sport,
-                                child: Text(sport),
-                              );
-                            }).toList(),
-                            onChanged: (String? value) {
-                              setState(() {
-                                _selectedSport = value;
-                              });
-                            },
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  borderSide: const BorderSide(
-                                    color: AppColors.red,
-                                  ),
-                                ),
-                                fillColor: AppColors.red,
-                                hintText: 'Choose a sport',
-                                labelText: '',
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  borderSide: const BorderSide(
-                                    color: AppColors.red,
-                                  ),
-                                )),
-                          ),
-                        ],
-                      ),
                       SizedBox(height: .01 * screenHeight),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton(
                             onPressed: () {
-                              // if (_selectedSport != null ||
-                              //     selectedDate != null) {
-                              //   print('Selected sport: $_selectedSport');
-                              //   Routes.instance.push(
-                              //       BookingScreen(
-                              //           date: selectedDate!,
-                              //           sport: _selectedSport!),
-                              //       context);
-                              // } else {
-                              //   print('Please select the sport or the date ');
-                              //   showDialog(
-                              //     context: context,
-                              //     builder: (BuildContext context) {
-                              //       return AlertDialog(
-                              //         title: const Text(
-                              //           'Warning',
-                              //           style: TextStyle(
-                              //             color: AppColors.red,
-                              //             fontSize: 18,
-                              //           ),
-                              //         ),
-                              //         content: const Text(
-                              //           'check the date or sport selected.',
-                              //           style: TextStyle(
-                              //               fontWeight: FontWeight.bold),
-                              //         ),
-                              //         actions: [
-                              //           TextButton(
-                              //             onPressed: () {
-                              //               Navigator.pop(context);
-                              //             },
-                              //             child: const Text('OK'),
-                              //           ),
-                              //         ],
-                              //       );
-                              //     },
-                              //   );
-                              // }
+                              if (selectedDate != null) {
+                                Routes.instance.push(
+                                    BookingScreen(date: selectedDate!),
+                                    context);
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text(
+                                        'Warning',
+                                        style: TextStyle(
+                                          color: AppColors.red,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      content: const Text(
+                                        'Select Date.',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
                             },
                             style:
                                 ButtonStyles.mainButton(buttonText: 'Submit'),

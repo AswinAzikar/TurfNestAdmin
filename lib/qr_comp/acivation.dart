@@ -238,14 +238,22 @@ class _studentlistState extends State<studentlist> {
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: AppColors.blue),
                                     onPressed: () async {
-                                      print(singlestudent!.id);
+                                         await FirebaseFirestoreHelper
+                                          .instance
+                                          .addTurfHistory(singlestudent!.id,
+                                              singlestudent!.ticketid,singlestudent!.email,singlehistory!.sport,singlehistory!.phone,singlehistory!.price,singlehistory!.date,singlehistory!.time);
+                                     
                                       bool a = await FirebaseFirestoreHelper
                                           .instance
                                           .expireTicket(singlestudent!.id,
                                               singlestudent!.ticketid);
 
+
+                                           
+
                                       if (a) {
                                         _controller.play();
+
 
                                         sendnotification(
                                             "Slot activated sucessfully",
