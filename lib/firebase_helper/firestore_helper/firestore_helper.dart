@@ -1,9 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+<<<<<<< HEAD
 
 import 'package:intl/intl.dart';
 
 
+=======
+import 'package:intl/intl.dart';
+
+>>>>>>> cddf457 (hi)
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turfnest_admin/constants.dart';
 import 'package:turfnest_admin/models/feedback_model.dart';
@@ -113,6 +118,7 @@ class FirebaseFirestoreHelper {
     return slots;
   }
 
+<<<<<<< HEAD
   confirmslots() async {
     List<int> slot = await getSlotsGreaterThanCurrentHour();
     List<int> slot2 = await getTicketsForCurrentDate();
@@ -121,6 +127,23 @@ class FirebaseFirestoreHelper {
     slot.sort();
 
     slot.removeWhere((element) => slot2.contains(element));
+=======
+  Future<List<int>> confirmslots() async {
+    final DateTime currentDate = DateTime.now();
+    final String formattedDate =
+        DateFormat('yyyy-MM-dd 00:00:00.000').format(currentDate);
+
+    // Parse the formatted date string back into a DateTime object
+    final DateTime parsedDate =
+        DateFormat('yyyy-MM-dd HH:mm:ss.SSS').parse(formattedDate);
+
+    List<int> slot = await getSlotsGreaterThanCurrentHour();
+    List<int> slot2 = await getTicketsForCurrentDate();
+    List<int> slot3 = await holidayDates(parsedDate);
+
+    slot.removeWhere((element) => slot2.contains(element));
+    slot.removeWhere((element) => slot3.contains(element));
+>>>>>>> cddf457 (hi)
     slot.sort();
     return slot;
   }
@@ -368,6 +391,7 @@ class FirebaseFirestoreHelper {
   }
 
   Future<List<int>> getTicketsForDate(DateTime selectedDate) async {
+<<<<<<< HEAD
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? userid = prefs.getString('userid');
 
@@ -381,6 +405,17 @@ class FirebaseFirestoreHelper {
         .get();
 
     List<int> ticketSlots = [];
+=======
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collectionGroup('bookedtickets')
+        .where('date', isEqualTo: selectedDate)
+        .get();
+
+    // Initialize a list to hold the ticket time slots
+    List<int> ticketSlots = [];
+
+    // Process the query results
+>>>>>>> cddf457 (hi)
     snapshot.docs.forEach((doc) {
       final data = doc.data() as Map<String, dynamic>?;
       if (data != null && data['time'] != null) {
@@ -414,7 +449,11 @@ class FirebaseFirestoreHelper {
     _firebaseFirestore.collection("holidays").add({"date": date, "time": time});
   }
 
+<<<<<<< HEAD
  addTurfHistory(String id, int ticketid, String email, String sport,
+=======
+  addTurfHistory(String id, int ticketid, String email, String sport,
+>>>>>>> cddf457 (hi)
       String phone, String price, String date, int time) async {
     try {
       final DateTime now = DateTime.now();
@@ -438,7 +477,10 @@ class FirebaseFirestoreHelper {
     }
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> cddf457 (hi)
   Future<List<turfhistory_model>> getTurfHistory() async {
     try {
       QuerySnapshot<Map<String, dynamic>> querrysnapshot =
@@ -460,6 +502,41 @@ class FirebaseFirestoreHelper {
         await FirebaseFirestore.instance.collection('admin').get();
     return querySnapshot.docs.isEmpty;
   }
+<<<<<<< HEAD
    
 
+=======
+
+  Future<String?> getEmail() async {
+    CollectionReference collection =
+        FirebaseFirestore.instance.collection('admin');
+
+    QuerySnapshot snapshot = await collection.get();
+
+    if (snapshot.docs.isNotEmpty) {
+      Map<String, dynamic> data =
+          snapshot.docs.first.data() as Map<String, dynamic>;
+
+      return data['email']?.toString();
+    } else {
+      return null;
+    }
+  }
+
+  Future<String?> getName() async {
+    CollectionReference collection =
+        FirebaseFirestore.instance.collection('admin');
+
+    QuerySnapshot snapshot = await collection.get();
+
+    if (snapshot.docs.isNotEmpty) {
+      Map<String, dynamic> data =
+          snapshot.docs.first.data() as Map<String, dynamic>;
+
+      return data['name']?.toString();
+    } else {
+      return null;
+    }
+  }
+>>>>>>> cddf457 (hi)
 }

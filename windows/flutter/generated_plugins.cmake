@@ -7,6 +7,10 @@ list(APPEND FLUTTER_PLUGIN_LIST
   cloud_firestore
   firebase_auth
   firebase_core
+<<<<<<< HEAD
+=======
+  geolocator_windows
+>>>>>>> cddf457 (hi)
   url_launcher_windows
 )
 

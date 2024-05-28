@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:latlong2/latlong.dart';
+>>>>>>> cddf457 (hi)
 import 'package:turfnest_admin/HomeScreen.dart';
 import 'package:turfnest_admin/constants.dart';
 import 'package:turfnest_admin/firebase_helper/auth_helper/auth_helper.dart';
@@ -18,6 +24,13 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
       _ownerPassword = '',
       _ownerLocation = '';
 
+<<<<<<< HEAD
+=======
+  final TextEditingController _locationController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+
+>>>>>>> cddf457 (hi)
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -35,13 +48,25 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
   @override
   void dispose() {
     _controller.dispose();
+<<<<<<< HEAD
+=======
+    _locationController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+>>>>>>> cddf457 (hi)
     super.dispose();
   }
 
   void _signUp() async {
+<<<<<<< HEAD
     bool a = await FirebaseFirestoreHelper.instance.isAdminCollectionEmpty();
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
+=======
+    if (_formKey.currentState?.validate() ?? false) {
+      _formKey.currentState?.save();
+      bool a = await FirebaseFirestoreHelper.instance.isAdminCollectionEmpty();
+>>>>>>> cddf457 (hi)
       if (a) {
         bool issignup = await FirebaseAuthHelper.instance.signup(
           context,
@@ -54,14 +79,25 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
         if (issignup) {
           Routes.instance.push(HomeScreen(), context);
         }
+<<<<<<< HEAD
       }
     } if(a==false) {
       showCustomDialog(
+=======
+      } else {
+        showCustomDialog(
+>>>>>>> cddf457 (hi)
           context: context,
           content: "Registration limit reached",
           buttonText: "ok",
           navigateFrom: LoginPage(),
+<<<<<<< HEAD
           title: "Warning");
+=======
+          title: "Warning"
+        );
+      }
+>>>>>>> cddf457 (hi)
     }
   }
 
@@ -98,6 +134,15 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                       filled: true,
                     ),
                     onSaved: (value) => _ownerName = value!,
+<<<<<<< HEAD
+=======
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your name';
+                      }
+                      return null;
+                    },
+>>>>>>> cddf457 (hi)
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.03),
@@ -113,6 +158,18 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                       filled: true,
                     ),
                     onSaved: (value) => _ownerEmail = value!,
+<<<<<<< HEAD
+=======
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                        return 'Please enter a valid email address';
+                      }
+                      return null;
+                    },
+>>>>>>> cddf457 (hi)
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.03),
@@ -122,6 +179,10 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                     children: [
                       Expanded(
                         child: TextFormField(
+<<<<<<< HEAD
+=======
+                          controller: _passwordController,
+>>>>>>> cddf457 (hi)
                           decoration: InputDecoration(
                             labelText: 'Password',
                             border: OutlineInputBorder(
@@ -132,11 +193,27 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                           ),
                           onSaved: (value) => _ownerPassword = value!,
                           obscureText: true,
+<<<<<<< HEAD
+=======
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a password';
+                            }
+                            if (value.length < 6) {
+                              return 'Password must be at least 6 characters long';
+                            }
+                            return null;
+                          },
+>>>>>>> cddf457 (hi)
                         ),
                       ),
                       SizedBox(width: screenWidth * 0.02),
                       Expanded(
                         child: TextFormField(
+<<<<<<< HEAD
+=======
+                          controller: _confirmPasswordController,
+>>>>>>> cddf457 (hi)
                           decoration: InputDecoration(
                             labelText: 'Confirm Password',
                             border: OutlineInputBorder(
@@ -146,6 +223,18 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                             filled: true,
                           ),
                           obscureText: true,
+<<<<<<< HEAD
+=======
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please confirm your password';
+                            }
+                            if (value != _passwordController.text) {
+                              return 'Passwords do not match';
+                            }
+                            return null;
+                          },
+>>>>>>> cddf457 (hi)
                         ),
                       ),
                     ],
@@ -155,6 +244,11 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                 FadeTransition(
                   opacity: _animation,
                   child: TextFormField(
+<<<<<<< HEAD
+=======
+                    readOnly: true,
+                    controller: _locationController,
+>>>>>>> cddf457 (hi)
                     decoration: InputDecoration(
                       labelText: 'Location of the Turf',
                       border: OutlineInputBorder(
@@ -163,8 +257,13 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                       fillColor: Colors.white,
                       filled: true,
                       suffixIcon: ElevatedButton(
+<<<<<<< HEAD
                         onPressed: () {
                           // Add code here to get location using GPS
+=======
+                        onPressed: () async {
+                          await getcurrentlocation(context);
+>>>>>>> cddf457 (hi)
                         },
                         child: Icon(Icons.gps_fixed, color: AppColors.blue),
                         style: ElevatedButton.styleFrom(
@@ -175,7 +274,17 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
+<<<<<<< HEAD
                     onSaved: (value) => _ownerLocation = value!,
+=======
+                    onSaved: (value) => _ownerLocation = _locationController.text,
+                    validator: (value) {
+                      if (_locationController.text.isEmpty) {
+                        return 'Please get the location';
+                      }
+                      return null;
+                    },
+>>>>>>> cddf457 (hi)
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.03),
@@ -197,4 +306,41 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
       ),
     );
   }
+<<<<<<< HEAD
+=======
+
+  Future<void> getcurrentlocation(BuildContext context) async {
+    ShowLoaderDialog(context);
+    await Geolocator.checkPermission();
+    LocationPermission ask = await Geolocator.requestPermission();
+
+    Position currentposition = await Geolocator.getCurrentPosition();
+
+    LatLng a = LatLng(currentposition.latitude, currentposition.longitude);
+    String location = await getPlaceFromLatLng(a);
+    Navigator.pop(context);
+
+    setState(() {
+      _locationController.text = location;
+    });
+  }
+
+  Future<String> getPlaceFromLatLng(LatLng latLng) async {
+    try {
+      final locations =
+          await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
+      if (locations.isNotEmpty) {
+        final placemark = locations.first;
+
+        return placemark.locality ?? '';
+      } else {
+        print('No results found for ${latLng.latitude}, ${latLng.longitude}');
+        return "No results found";
+      }
+    } catch (e) {
+      print('Error fetching place: $e');
+      return "Error fetching location";
+    }
+  }
+>>>>>>> cddf457 (hi)
 }
