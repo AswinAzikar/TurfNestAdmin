@@ -31,7 +31,9 @@ class _MyWidgetState extends State<SportsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.scbgd,
       appBar: AppBar(
+        backgroundColor: AppColors.scbgd,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: AppColors.blue),
           onPressed: () {
@@ -39,7 +41,7 @@ class _MyWidgetState extends State<SportsPage> {
           },
         ),
         title: Text(
-          "GAMES",
+          "Sports",
           style: TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold),
         ),
       ),
@@ -63,9 +65,17 @@ class _MyWidgetState extends State<SportsPage> {
                 margin: EdgeInsets.only(bottom: 10),
                 padding: EdgeInsets.all(13),
                 decoration: BoxDecoration(
-                  border: Border.all(width: 2),
-                  color: Colors.grey.shade200,
+                  // border: Border.all(width: 2),
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 5), // changes position of shadow
+                    ),
+                  ],
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,7 +107,10 @@ class _MyWidgetState extends State<SportsPage> {
                           print("Deletion failed");
                         }
                       },
-                    icon: Icon(Icons.delete,color: Colors.red,),
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
                     ),
                     IconButton(
                       icon: Icon(Icons.edit),

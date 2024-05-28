@@ -60,6 +60,7 @@ class _BookingState extends State<BookingScreen> {
     dates = widget.date;
 
     return Scaffold(
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         backgroundColor: AppColors.blue,
         leading: IconButton(
@@ -127,9 +128,9 @@ class _BookingState extends State<BookingScreen> {
                             Text(
                               'SELECT SLOT',
                               style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.red),
                             ),
                             SizedBox(height: 30),
                             Expanded(
@@ -194,8 +195,19 @@ class _BookingState extends State<BookingScreen> {
                       ),
                       child: Container(
                         height: 150,
-                        color: AppColors.blue,
 
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(125, 224, 251, 249),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset: const Offset(
+                                  0, -5), // changes position of shadow
+                            ),
+                          ],
+                        ),
                         //add a table instead of this
                         child: Center(
                           child: Column(
@@ -219,7 +231,7 @@ class _BookingState extends State<BookingScreen> {
                                               Text(
                                                 'Slot Time',
                                                 style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.black,
                                                 ),
                                               ),
                                               SizedBox(width: 8),
@@ -234,7 +246,7 @@ class _BookingState extends State<BookingScreen> {
                                                   convertTo12HourFormat(
                                                       SLOT + 1),
                                               style: TextStyle(
-                                                color: Colors.white,
+                                                color: Colors.black,
                                               ),
                                               textAlign: TextAlign
                                                   .center, // Align center
@@ -253,7 +265,7 @@ class _BookingState extends State<BookingScreen> {
                                               Text(
                                                 'Date',
                                                 style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.black,
                                                 ),
                                               ),
                                               SizedBox(width: 8),
@@ -265,7 +277,7 @@ class _BookingState extends State<BookingScreen> {
                                             child: Text(
                                               dates.toString().substring(0, 11),
                                               style: TextStyle(
-                                                color: Colors.white,
+                                                color: Colors.black,
                                               ),
                                               textAlign: TextAlign
                                                   .center, // Align center
