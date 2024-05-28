@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:turfnest_admin/HomeScreen.dart';
 import 'package:turfnest_admin/constants.dart';
 import 'package:turfnest_admin/firebase_helper/auth_helper/auth_helper.dart';
+import 'package:turfnest_admin/firebase_helper/firestore_helper/firestore_helper.dart';
+import 'package:turfnest_admin/login.dart';
 import 'package:turfnest_admin/routes.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -14,9 +16,8 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
   late String _ownerName = '',
       _ownerEmail = '',
       _ownerPassword = '',
-      _ownerConfirmPassword = '',
       _ownerLocation = '';
-  bool _isLoading = false;
+
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -37,21 +38,30 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void _signUp()async {
+  void _signUp() async {
+    bool a = await FirebaseFirestoreHelper.instance.isAdminCollectionEmpty();
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
-      // Perform sign-up logic here
-      bool issignup = await FirebaseAuthHelper.instance.signup(
-      context,
-     _ownerName,
-      _ownerEmail,
-      _ownerLocation,
-      _ownerPassword,
-    );
+      if (a) {
+        bool issignup = await FirebaseAuthHelper.instance.signup(
+          context,
+          _ownerName,
+          _ownerEmail,
+          _ownerLocation,
+          _ownerPassword,
+        );
 
-    if (issignup) {
-      Routes.instance.push(HomeScreen(), context);
-    }
+        if (issignup) {
+          Routes.instance.push(HomeScreen(), context);
+        }
+      }
+    } if(a==false) {
+      showCustomDialog(
+          context: context,
+          content: "Registration limit reached",
+          buttonText: "ok",
+          navigateFrom: LoginPage(),
+          title: "Warning");
     }
   }
 
@@ -135,7 +145,6 @@ class _SignUpPageState extends State<SignUpPage> with TickerProviderStateMixin {
                             fillColor: Colors.white,
                             filled: true,
                           ),
-                          onSaved: (value) => _ownerConfirmPassword = value!,
                           obscureText: true,
                         ),
                       ),

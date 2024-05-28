@@ -6,6 +6,7 @@ import 'package:turfnest_admin/constants.dart';
 import 'package:turfnest_admin/custom.dart';
 import 'package:turfnest_admin/routes.dart';
 import 'package:turfnest_admin/turfcontrol/TurfControl.dart';
+import 'package:turfnest_admin/turfhistory.dart';
 
 import 'Dashboard.dart';
 
@@ -109,7 +110,7 @@ class _MenuState extends State<Menu> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const FeedbackPage(),
+                      builder: (context) => const TurfhistoryPage(),
                     ),
                   );
                 }),

@@ -53,7 +53,7 @@ class FirebaseAuthHelper {
       await prefs.setString('userid', Uid);
       await prefs.setString('email', email);
 
-      await store.collection("users").doc(Uid).set({
+      await store.collection("admin").doc(Uid).set({
         "id": Uid,
         "name":name,
         "email": email,

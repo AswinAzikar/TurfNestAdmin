@@ -3,21 +3,22 @@ import 'package:turfnest_admin/HomeScreen.dart';
 
 import 'package:turfnest_admin/constants.dart';
 import 'package:turfnest_admin/firebase_helper/firestore_helper/firestore_helper.dart';
-import 'package:turfnest_admin/models/feedback_model.dart';
+
+import 'package:turfnest_admin/models/turfhistorymodel.dart';
 
 import 'package:turfnest_admin/routes.dart';
 
-class FeedbackPage extends StatefulWidget {
-  const FeedbackPage({super.key});
+class TurfhistoryPage extends StatefulWidget {
+  const TurfhistoryPage({super.key});
 
   @override
-  State<FeedbackPage> createState() => _MyWidgetState();
+  State<TurfhistoryPage> createState() => _MyWidgetState();
 }
 
-class _MyWidgetState extends State<FeedbackPage> {
-  List<feedback_model> fullfeedback = [];
+class _MyWidgetState extends State<TurfhistoryPage> {
+  List<turfhistory_model> fullhistory = [];
 
-  feedback_model? singlefeedback;
+  turfhistory_model? singlehistory;
 
   @override
   void initState() {
@@ -27,9 +28,21 @@ class _MyWidgetState extends State<FeedbackPage> {
   }
 
   getsport() async {
-    fullfeedback = await FirebaseFirestoreHelper.instance.getfeedback();
+    fullhistory = await FirebaseFirestoreHelper.instance.getTurfHistory();
     setState(() {});
   }
+
+    String convertTo12HourFormat(int hour) {
+    String period = 'AM';
+    if (hour >= 12) {
+      period = 'PM';
+    }
+    if (hour > 12) {
+      hour -= 12;
+    }
+    return '$hour $period';
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +55,7 @@ class _MyWidgetState extends State<FeedbackPage> {
           },
         ),
         title: Text(
-          "FEEDBACKS",
+          "HISTORY",
           style: TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold),
         ),
       ),
@@ -50,8 +63,8 @@ class _MyWidgetState extends State<FeedbackPage> {
         child: Padding(
           padding: const EdgeInsets.all(13.0),
           child: Column(
-            children: List.generate(fullfeedback.length, (index) {
-              singlefeedback = fullfeedback[index];
+            children: List.generate(fullhistory.length, (index) {
+              singlehistory = fullhistory[index];
               return Container(
                 margin: EdgeInsets.only(bottom: 10),
                 padding: EdgeInsets.all(13),
@@ -67,9 +80,14 @@ class _MyWidgetState extends State<FeedbackPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('email:${singlefeedback!.email}'),
-                          Text('Phone: ${singlefeedback!.phone}'), // Time
-                          Text('content: ${singlefeedback!.content}'),
+                          Text('Ticket Id: ${singlehistory!.ticketid}'),
+                          Text('Email:${singlehistory!.email}'),
+                          Text('Phone: ${singlehistory!.phone}'), // Time
+                          Text( '${convertTo12HourFormat(singlehistory!.time)} - ${convertTo12HourFormat(singlehistory!.time + 1)}'),
+                          Text('Date: ${singlehistory!.date.substring(0,11)}'),
+                          Text('Sport: ${singlehistory!.sport}'),
+                          Text(
+                              'Activation time: ${singlehistory!.activationTime.substring(0,19)}'),
                           // Username
                         ],
                       ),

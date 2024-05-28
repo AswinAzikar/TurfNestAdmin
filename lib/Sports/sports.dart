@@ -80,7 +80,7 @@ class _MyWidgetState extends State<SportsPage> {
                       ),
                     ),
                     SizedBox(width: 3),
-                    ElevatedButton(
+                    IconButton(
                       onPressed: () async {
                         var success = await FirebaseFirestoreHelper.instance
                             .deleteGame(singlesport.game);
@@ -97,13 +97,7 @@ class _MyWidgetState extends State<SportsPage> {
                           print("Deletion failed");
                         }
                       },
-                      child: Text(
-                        "Delete",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.red),
-                      ),
+                    icon: Icon(Icons.delete,color: Colors.red,),
                     ),
                     IconButton(
                       icon: Icon(Icons.edit),
