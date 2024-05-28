@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:turfnest_admin/constants.dart';
 import 'package:turfnest_admin/firebase_helper/firestore_helper/firestore_helper.dart';
+import 'package:turfnest_admin/models/profile.dart';
 import 'package:turfnest_admin/models/ticketmodel.dart';
 import 'package:turfnest_admin/qr_comp/qrpage.dart';
 import 'package:turfnest_admin/routes.dart';
@@ -76,7 +77,7 @@ class _DashboardState extends State<Dashboard> {
     double screenWidth = MediaQuery.of(context).size.width;
     double rectangleHeight = screenHeight * 0.13;
     double rectangleWidth = screenWidth * 0.9;
-   
+
     return Scaffold(
       backgroundColor: AppColors.scbgd,
       appBar: AppBar(
@@ -99,7 +100,12 @@ class _DashboardState extends State<Dashboard> {
             ),
             iconSize: 32,
             onPressed: () {
-              // Handle user icon button press
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileScreen(),
+                ),
+              );
             },
           ),
         ],

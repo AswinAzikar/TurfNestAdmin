@@ -42,7 +42,7 @@ class _MyWidgetState extends State<FeedbackPage> {
           },
         ),
         title: Text(
-          "FEEDBACKS",
+          "Feedbacks",
           style: TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold),
         ),
       ),
@@ -56,9 +56,17 @@ class _MyWidgetState extends State<FeedbackPage> {
                 margin: EdgeInsets.only(bottom: 10),
                 padding: EdgeInsets.all(13),
                 decoration: BoxDecoration(
-                  border: Border.all(width: 2),
-                  color: Colors.grey.shade200,
+                  //   border: Border.all(width: 2),
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 5), // changes position of shadow
+                    ),
+                  ],
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

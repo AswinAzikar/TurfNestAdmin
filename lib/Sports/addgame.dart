@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:turfnest_admin/Menu.dart';
+import 'package:turfnest_admin/Sports/sports.dart';
 
 import 'package:turfnest_admin/constants.dart';
 
@@ -35,6 +36,24 @@ class _LoginPageState extends State<AddGame> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: AppColors.scbgd,
+      appBar: AppBar(
+        backgroundColor: AppColors.scbgd,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: AppColors.blue,
+          ),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SportsPage(),
+              ),
+            );
+          },
+        ),
+      ),
       body: Center(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
@@ -53,9 +72,18 @@ class _LoginPageState extends State<AddGame> {
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset:
+                            const Offset(0, 5), // changes position of shadow
+                      ),
+                    ],
                   ),
                   child: Text(
-                    'ADD GAME',
+                    'Add Sport',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -73,6 +101,15 @@ class _LoginPageState extends State<AddGame> {
                       bottomLeft: Radius.circular(30),
                       bottomRight: Radius.circular(30),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset:
+                            const Offset(0, 5), // changes position of shadow
+                      ),
+                    ],
                   ),
                   child: Column(
                     children: [

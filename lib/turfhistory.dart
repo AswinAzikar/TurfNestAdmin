@@ -32,7 +32,7 @@ class _MyWidgetState extends State<TurfhistoryPage> {
     setState(() {});
   }
 
-    String convertTo12HourFormat(int hour) {
+  String convertTo12HourFormat(int hour) {
     String period = 'AM';
     if (hour >= 12) {
       period = 'PM';
@@ -42,7 +42,6 @@ class _MyWidgetState extends State<TurfhistoryPage> {
     }
     return '$hour $period';
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +54,7 @@ class _MyWidgetState extends State<TurfhistoryPage> {
           },
         ),
         title: Text(
-          "HISTORY",
+          "History",
           style: TextStyle(color: AppColors.blue, fontWeight: FontWeight.bold),
         ),
       ),
@@ -69,9 +68,17 @@ class _MyWidgetState extends State<TurfhistoryPage> {
                 margin: EdgeInsets.only(bottom: 10),
                 padding: EdgeInsets.all(13),
                 decoration: BoxDecoration(
-                  border: Border.all(width: 2),
-                  color: Colors.grey.shade200,
+                  // border: Border.all(width: 2),
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 5), // changes position of shadow
+                    ),
+                  ],
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,11 +90,12 @@ class _MyWidgetState extends State<TurfhistoryPage> {
                           Text('Ticket Id: ${singlehistory!.ticketid}'),
                           Text('Email:${singlehistory!.email}'),
                           Text('Phone: ${singlehistory!.phone}'), // Time
-                          Text( '${convertTo12HourFormat(singlehistory!.time)} - ${convertTo12HourFormat(singlehistory!.time + 1)}'),
-                          Text('Date: ${singlehistory!.date.substring(0,11)}'),
+                          Text(
+                              '${convertTo12HourFormat(singlehistory!.time)} - ${convertTo12HourFormat(singlehistory!.time + 1)}'),
+                          Text('Date: ${singlehistory!.date.substring(0, 11)}'),
                           Text('Sport: ${singlehistory!.sport}'),
                           Text(
-                              'Activation time: ${singlehistory!.activationTime.substring(0,19)}'),
+                              'Activation time: ${singlehistory!.activationTime.substring(0, 19)}'),
                           // Username
                         ],
                       ),

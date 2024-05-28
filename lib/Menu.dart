@@ -4,6 +4,7 @@ import 'package:turfnest_admin/HomeScreen.dart';
 import 'package:turfnest_admin/Sports/sports.dart';
 import 'package:turfnest_admin/constants.dart';
 import 'package:turfnest_admin/custom.dart';
+import 'package:turfnest_admin/models/profile.dart';
 import 'package:turfnest_admin/routes.dart';
 import 'package:turfnest_admin/turfcontrol/TurfControl.dart';
 import 'package:turfnest_admin/turfhistory.dart';
@@ -58,7 +59,7 @@ class _MenuState extends State<Menu> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => ProfileScreen(),
                 ),
               );
             },
