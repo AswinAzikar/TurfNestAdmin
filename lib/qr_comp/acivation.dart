@@ -53,6 +53,17 @@ class _studentlistState extends State<studentlist> {
     });
   }
 
+  String convertTo12HourFormat(int hour) {
+    String period = 'AM';
+    if (hour >= 12) {
+      period = 'PM';
+    }
+    if (hour > 12) {
+      hour -= 12;
+    }
+    return '$hour $period';
+  }
+
   sendnotification(String title, String subtitle) {
     AwesomeNotifications().createNotification(
         content: NotificationContent(
@@ -72,16 +83,7 @@ class _studentlistState extends State<studentlist> {
       alignment: Alignment.topCenter,
       children: [
         Scaffold(
-          appBar: AppBar(
-            title: Text(
-              "CONFIRM SLOT",
-              style: TextStyle(
-                color: AppColors.blue,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+        
           body: isloading
               ? Center(
                   child: Container(
@@ -94,220 +96,230 @@ class _studentlistState extends State<studentlist> {
                     alignment: Alignment.center,
                   ),
                 )
-              : Padding(
-                  padding: const EdgeInsets.all(14.0),
-                  child: Container(
-                    height: 500,
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(2.0),
-                      border: Border.all(color: Colors.black, width: 3),
-                    ),
-                    child: Column(
-                      //mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        CircleAvatar(
-                          radius: 50,
-                          backgroundColor: AppColors.blue,
-                          foregroundColor: AppColors.white,
-                          child: Icon(Icons.airplane_ticket),
-                        ),
-                        SizedBox(height: 50),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Expanded(
-                              child: Column(
+              : Center(
+                child: Padding(
+                    padding: const EdgeInsets.all(14.0),
+                    child: Container(
+                      height: 500,
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(18.0),
+                         boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: const Offset(0, 5), // changes position of shadow
+                      ),
+                    ],
+                       
+                      ),
+                      child: Column(
+                        //mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          CircleAvatar(
+                            radius: 50,
+                            backgroundColor: AppColors.blue,
+                            foregroundColor: AppColors.white,
+                            child: Icon(Icons.airplane_ticket),
+                          ),
+                          SizedBox(height: 50),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Ticket Number:',
+                                        style: const TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold)),
+                                    SizedBox(height: 10.0),
+                                    Text('Email:',
+                                        style: const TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold)),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    Text('Phone:',
+                                        style: const TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold)),
+                                    SizedBox(height: 10.0),
+                                    Text('Time Slot:',
+                                        style: const TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold)),
+                                    SizedBox(height: 10.0),
+                                    Text('Date:',
+                                        style: const TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold)),
+                                    SizedBox(height: 10.0),
+                                    Text('Sport:',
+                                        style: const TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold)),
+                                    SizedBox(height: 10.0),
+                                    Text('Amount:',
+                                        style: const TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                  width: 16.0), // Add space between columns
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Ticket Number:',
-                                      style: const TextStyle(
-                                          fontSize: 12.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold)),
-                                  SizedBox(height: 10.0),
-                                  Text('Email:',
-                                      style: const TextStyle(
-                                          fontSize: 12.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold)),
-                                  SizedBox(
-                                    height: 10.0,
+                                  Text(
+                                    singlestudent!.ticketid.toString(),
+                                    style: const TextStyle(
+                                        fontSize: 12.0,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  Text('Phone:',
-                                      style: const TextStyle(
-                                          fontSize: 12.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold)),
-                                  SizedBox(height: 10.0),
-                                  Text('Time Slot:',
-                                      style: const TextStyle(
-                                          fontSize: 12.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold)),
-                                  SizedBox(height: 10.0),
-                                  Text('Date:',
-                                      style: const TextStyle(
-                                          fontSize: 12.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold)),
-                                  SizedBox(height: 10.0),
-                                  Text('Sport:',
-                                      style: const TextStyle(
-                                          fontSize: 12.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold)),
-                                  SizedBox(height: 10.0),
-                                  Text('Amount:',
-                                      style: const TextStyle(
-                                          fontSize: 12.0,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold)),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                                width: 16.0), // Add space between columns
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  singlestudent!.ticketid.toString(),
-                                  style: const TextStyle(
-                                      fontSize: 12.0,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(height: 10.0),
-                                Text(
-                                  singlestudent!.email,
-                                  style: const TextStyle(
-                                      fontSize: 12.0,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(height: 10.0),
-                                Text(
-                                  singlestudent!.phone,
-                                  style: const TextStyle(
-                                      fontSize: 12.0,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(height: 10.0),
-                                Text(
-                                  singlestudent!.time.toString(),
-                                  style: const TextStyle(
-                                      fontSize: 12.0,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(height: 10.0),
-                                Text(
-                                  singlestudent!.date.substring(0, 11),
-                                  style: const TextStyle(
-                                      fontSize: 12.0,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(height: 10.0),
-                                Text(
-                                  singlestudent!.sport,
-                                  style: const TextStyle(
-                                      fontSize: 12.0,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(height: 10.0),
-                                Text(
-                                  singlestudent!.price,
-                                  style: const TextStyle(
-                                      fontSize: 12.0,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Center(
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: AppColors.blue),
-                                    onPressed: () async {
-                                      await FirebaseFirestoreHelper.instance
-                                          .addTurfHistory(
-                                              singlestudent!.id,
-                                              singlestudent!.ticketid,
-                                              singlestudent!.email,
-                                              singlestudent!.sport,
-                                              singlestudent!.phone,
-                                              singlestudent!.price,
-                                              singlestudent!.date,
-                                              singlestudent!.time);
-
-                                      bool a = await FirebaseFirestoreHelper
-                                          .instance
-                                          .expireTicket(singlestudent!.id,
-                                              singlestudent!.ticketid);
-
-                                      if (a) {
-                                        _controller.play();
-
-                                        sendnotification(
-                                            "Slot activated sucessfully",
-                                            "enjoy");
-
-                                        showDialog(
-                                          barrierDismissible: false,
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: Text("sucessful"),
-                                              content: Text(
-                                                  "Slot activated sucessfully"),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () {
-                                                    _controller.stop();
-
-                                                    Routes.instance.push(
-                                                        HomeScreen(), context);
-                                                  },
-                                                  child: Text("OK"),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      }
-                                      if (a == false) {
-                                        showCustomDialog(
+                                  const SizedBox(height: 10.0),
+                                  Text(
+                                    singlestudent!.email,
+                                    style: const TextStyle(
+                                        fontSize: 12.0,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  Text(
+                                    singlestudent!.phone,
+                                    style: const TextStyle(
+                                        fontSize: 12.0,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  Text(
+                                    '${convertTo12HourFormat(singlestudent!.time)} - ${convertTo12HourFormat(singlestudent!.time + 1)}',
+                                    style: const TextStyle(
+                                        fontSize: 12.0,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  Text(
+                                    singlestudent!.date.substring(0, 11),
+                                    style: const TextStyle(
+                                        fontSize: 12.0,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  Text(
+                                    singlestudent!.sport,
+                                    style: const TextStyle(
+                                        fontSize: 12.0,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 10.0),
+                                  Text(
+                                    singlestudent!.price,
+                                    style: const TextStyle(
+                                        fontSize: 12.0,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Center(
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: AppColors.blue),
+                                      onPressed: () async {
+                                        await FirebaseFirestoreHelper.instance
+                                            .addTurfHistory(
+                                                singlestudent!.id,
+                                                singlestudent!.ticketid,
+                                                singlestudent!.email,
+                                                singlestudent!.sport,
+                                                singlestudent!.phone,
+                                                singlestudent!.price,
+                                                singlestudent!.date,
+                                                singlestudent!.time);
+                
+                                        bool a = await FirebaseFirestoreHelper
+                                            .instance
+                                            .expireTicket(singlestudent!.id,
+                                                singlestudent!.ticketid);
+                
+                                        if (a) {
+                                          _controller.play();
+                
+                                          sendnotification(
+                                              "Slot activated sucessfully",
+                                              "enjoy");
+                
+                                          showDialog(
+                                            barrierDismissible: false,
                                             context: context,
-                                            content: "ERROR",
-                                            buttonText: "CLOSE",
-                                            navigateFrom: HomeScreen(),
-                                            title: "ALERT");
-                                      }
-                                    },
-                                    child: const Text(
-                                      'ACTIVATE',
-                                      style: TextStyle(
-                                          color: AppColors.white,
-                                          fontWeight: FontWeight.bold),
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text("sucessful"),
+                                                content: Text(
+                                                    "Slot activated sucessfully"),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      _controller.stop();
+                
+                                                      Routes.instance.push(
+                                                          HomeScreen(), context);
+                                                    },
+                                                    child: Text("OK"),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        }
+                                        if (a == false) {
+                                          showCustomDialog(
+                                              context: context,
+                                              content: "ERROR",
+                                              buttonText: "CLOSE",
+                                              navigateFrom: HomeScreen(),
+                                              title: "ALERT");
+                                        }
+                                      },
+                                      child: const Text(
+                                        'ACTIVATE',
+                                        style: TextStyle(
+                                            color: AppColors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
+              ),
         ),
         ConfettiWidget(
           confettiController: _controller,
