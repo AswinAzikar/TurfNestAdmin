@@ -673,7 +673,7 @@ class _DashboardState extends State<Dashboard> {
                                                     '${convertTo12HourFormat(slots[index])} - ${convertTo12HourFormat(slots[index] + 1)}',
                                                     // Time label (example: 1 PM, 2 PM, ...)
                                                     style:
-                                                        TextStyle(fontSize: 16),
+                                                        TextStyle(fontSize: 10),
                                                   ),
                                                 ),
                                               );

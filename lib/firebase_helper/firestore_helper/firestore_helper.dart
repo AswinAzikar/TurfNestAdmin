@@ -408,7 +408,7 @@ class FirebaseFirestoreHelper {
 =======
     QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collectionGroup('bookedtickets')
-        .where('date', isEqualTo: selectedDate)
+        .where('date', isEqualTo: selectedDate.toString())
         .get();
 
     // Initialize a list to hold the ticket time slots
